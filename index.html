@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Todo Management System</h2>
+                        <form action="" id="todoForm">
+                            <div class="form-group">
+                                <label for="title">Title*</label>
+                                <input type="text" class="form-control" id="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="completed">Status*</label>
+                                <input type="text" class="form-control" id="completed">
+                            </div>
+                            <div class="form-group">
+                                <label for="userId">User Id*</label>
+                                <input type="text" class="form-control" id="userId">
+                            </div>
+                            <button id="addTodoBtn"  class="btn btn-primary btn-block">Add Todo</button>
+                            <button id="updateTodoBtn" type="button" class="d-none btn btn-primary btn-block">Update Todo</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Title</th>
+                                    <th>User Id</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                    <th>Remove</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="todosContainer">
+                              <!-- <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>  -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spinner d-none" id="spinner">
+        <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./assets/js/app.js"></script>
+</html>
