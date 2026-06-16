@@ -37,6 +37,9 @@ function fetchTodos(){
             let res=JSON.parse(xhr.response)
             todosArr=res
             onCreateTodos(res.reverse())
+
+        }else{
+            snackBar('Error..','error')
         }
     }
 }
@@ -50,11 +53,25 @@ function onCreateTodos(arr){
                                     <td>${t.title}</td>
                                     <td>${t.userId}</td>
                                     <td>${t.completed?'<i class="fa-solid fa-check text-primary"></i>Completed':'<i class="fa-solid fa-spinner text-warning"></i>Pending'}</td>
-                                    <td><i onclick="onEdit(this)" class="fa-solid fa-pen-to-square fa-2x text-primary"></i></td>
-                                    <td><i onclick="onRemove(this)" class="fa-solid fa-trash-can fa-2x text-danger"></i></td>
+                                    <td><i onclick="onEdit(this)" 
+                                    class="fa-solid fa-pen-to-square fa-2x text-primary"
+                                    data-placement="top" 
+                                    data-toggle="tooltip"
+                                    title="Edit Button"></i></td>
+                                    <td><i onclick="onRemove(this)" 
+                                    class="fa-solid fa-trash-can fa-2x text-danger"
+                                    
+                                    data-placement="top" 
+                                    data-toggle="tooltip"
+                                    title="Remove Button"></i></td>
                                 </tr> `
     })
+    
     todosContainer.innerHTML=res
+    
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 }
 
 function onSubmitTodo(e){
@@ -74,19 +91,39 @@ function onSubmitTodo(e){
     xhr.onload=function(){
         if(xhr.status>=200 && xhr.status<=299){
             let res=JSON.parse(xhr.response)
+
+           
             let tr=document.createElement('tr')
             tr.id= res.id
             tr.innerHTML=`  <td>${todosArr.length + 1}</td>
                                     <td>${new_todo.title}</td>
                                     <td>${new_todo.userId}</td>
                                     <td>${new_todo.completed?'<i class="fa-solid fa-check text-primary"></i>Completed':'<i class="fa-solid fa-spinner text-warning"></i>Pending'}</td>
-                                    <td><i onclick="onEdit(this)" class="fa-solid fa-pen-to-square fa-2x text-primary"></i></td>
-                                    <td><i onclick="onRemove(this)" class="fa-solid fa-trash-can fa-2x text-danger"></i></td>`
+                                    <td><i onclick="onEdit(this)" 
+                                    class="fa-solid fa-pen-to-square fa-2x text-primary"
+                                     data-placement="top" 
+                                    data-toggle="tooltip"
+                                    title="Edit Button"
+                                    ></i></td>
+                                    <td><i onclick="onRemove(this)"
+                                     class="fa-solid fa-trash-can fa-2x text-danger"
+                                    data-placement="top" 
+                                    data-toggle="tooltip"
+                                    title="Remove Button">
+                                    </i></td>`
             todosContainer.prepend(tr)
             updateSrNo()
-            todoForm.reset()
-            snackBar('New Todo Created Successfully..','success')
             spinner.classList.add('d-none')
+            
+            snackBar('New Todo Created Successfully..','success')
+              $(function () {
+                  $('[data-toggle="tooltip"]').tooltip()
+             })
+
+            
+            todoForm.reset()
+           
+            
         }else{
             spinner.classList.add('d-none')
             snackBar('Error..','error')
@@ -116,7 +153,13 @@ function onEdit(e){
 
             addTodoBtn.classList.add('d-none')
             updateTodoBtn.classList.remove('d-none')
+
+            todoForm.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             spinner.classList.add('d-none')
+
             
         }else{
             spinner.classList.add('d-none')
@@ -155,9 +198,22 @@ function onUpdateTodo(){
     : '<i class="fa-solid fa-spinner text-warning"></i> Pending';
 
             todoForm.reset()
+
             addTodoBtn.classList.remove('d-none')
             updateTodoBtn.classList.add('d-none')
             spinner.classList.add('d-none')
+            let updatedRow = document.getElementById(UPDATE_ID);
+
+            updatedRow.classList.add('highlight-row');
+
+            updatedRow.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+            setTimeout(() => {
+                updatedRow.classList.remove('highlight-row');
+            }, 3000);
             snackBar('Updated Successfully..','success')
         }else{
             spinner.classList.add('d-none')
@@ -187,6 +243,8 @@ function onRemove(e){
         if(xhr.status>=200 && xhr.status<=299){
             document.getElementById(REMOVE_ID).remove()
            updateSrNo()
+
+           
             spinner.classList.add('d-none')
             snackBar('Deleted Successfully..','success')
         }else{
