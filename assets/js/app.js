@@ -115,7 +115,7 @@ function onSubmitTodo(e){
             updateSrNo()
             spinner.classList.add('d-none')
             
-            snackBar('New Todo Created Successfully..','success')
+            snackBar(`New Todo ${new_todo.title}Created Successfully..`,'success')
               $(function () {
                   $('[data-toggle="tooltip"]').tooltip()
              })
@@ -214,7 +214,7 @@ function onUpdateTodo(){
             setTimeout(() => {
                 updatedRow.classList.remove('highlight-row');
             }, 3000);
-            snackBar('Updated Successfully..','success')
+            snackBar(`${UPDATE_ID} Updated Successfully..`,'success')
         }else{
             spinner.classList.add('d-none')
             snackBar('Error..','error')
@@ -246,7 +246,7 @@ function onRemove(e){
 
            
             spinner.classList.add('d-none')
-            snackBar('Deleted Successfully..','success')
+            snackBar(`${REMOVE_ID} Deleted Successfully..`,'success')
         }else{
             spinner.classList.add('d-none')
             snackBar('Error..','error')
