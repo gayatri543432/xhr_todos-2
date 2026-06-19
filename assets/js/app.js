@@ -244,13 +244,12 @@ function onRemove(e){
             document.getElementById(REMOVE_ID).remove()
            updateSrNo()
 
-           
-            spinner.classList.add('d-none')
             snackBar(`${REMOVE_ID} Deleted Successfully..`,'success')
         }else{
-            spinner.classList.add('d-none')
+            
             snackBar('Error..','error')
         }
+    spinner.classList.add('d-none')
     }
   }
 });
